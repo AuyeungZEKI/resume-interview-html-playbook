@@ -1,5 +1,6 @@
 ---
 name: resume-interview-html-playbook
+version: 1.0.0
 description: This skill should be used to prepare for or review a job interview from a candidate resume and a JD / JD screenshot / interview transcript, producing a single-file offline HTML document from a fixed magazine-style template. Prep mode builds a tailored interview playbook (JD match, resume defensibility map, Q&A, case, interviewer questions); review mode turns a transcript or feedback into failure diagnosis, repair rules, rewritten answers, and next-round predictions. Triggers include 面试准备, 面试手册, 准备一面/二面/主管面/HR面, 模拟面试题, 根据简历和JD准备面试, 面试复盘, 面后复盘, 面试逐字稿分析, 面试反馈, 下一轮怎么准备, interview prep, interview review. Never invents metrics absent from the resume.
 display_name: 简历面试手册
 display_name_en: Resume Interview Playbook
