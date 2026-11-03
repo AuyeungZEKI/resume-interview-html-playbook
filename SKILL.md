@@ -1,15 +1,17 @@
 ---
 name: resume-interview-html-playbook
 description: This skill should be used to prepare for or review a job interview from a candidate resume and a JD / JD screenshot / interview transcript, producing a single-file offline HTML document from a fixed magazine-style template. Prep mode builds a tailored interview playbook (JD match, resume defensibility map, Q&A, case, interviewer questions); review mode turns a transcript or feedback into failure diagnosis, repair rules, rewritten answers, and next-round predictions. Triggers include 面试准备, 面试手册, 准备一面/二面/主管面/HR面, 模拟面试题, 根据简历和JD准备面试, 面试复盘, 面后复盘, 面试逐字稿分析, 面试反馈, 下一轮怎么准备, interview prep, interview review. Never invents metrics absent from the resume.
-description_zh: 简历定制面试手册与面后复盘
-description_en: Resume interview playbook & review
+display_name: 简历面试手册
+display_name_en: Resume Interview Playbook
+description_zh: 上传简历 + JD（或截图），生成定制面试手册：JD 匹配矩阵、简历追问防守地图、自我介绍、高频问答、场景案例、反问清单；面试后提供逐字稿或反馈，生成复盘：失分诊断、修复规则、回答重写、下一轮预测。单文件离线 HTML，杂志风固定模板，不编造简历里没有的数据。
+description_en: Resume interview playbook & post-interview review
 disable: false
 agent_created: true
 author: zekiouyang
 repository: https://github.com/AuyeungZEKI/resume-interview-html-playbook
 ---
 
-# resume-interview-html-playbook
+# 简历面试手册 · Resume Interview Playbook
 
 > 作者：zekiouyang · GitHub：https://github.com/AuyeungZEKI/resume-interview-html-playbook
 
