@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<!--
+  resume-interview-html-playbook · 单文件模板
+  使用规则（填充后整段注释删除）：
+  1. 只替换 {{占位符}} 与示例行；不改 <style> 里的设计 token，保证每份手册版式一致。
+  2. 带 data-mode="prep" 的 section 用于面试前手册；data-mode="review" 用于面后复盘；data-mode="both" 两种都保留。
+     生成哪种文件，就删除另一种模式的 section，并同步删除侧栏目录里对应的 <a>。
+  3. 标有 REPEAT 注释的块按需复制；可选 section（标注 OPTIONAL）无内容时整段删除，不留空壳。
+  4. 证据标签：.tag.ok = 简历可证 / .tag.tr = 岗位翻译 / .tag.gap = 缺口风险 / .tag.inf = 推断。
+     需要候选人面试前补充的事实一律用 <span class="fill">待补：…</span>，不得编造。
+  5. 成品不得出现版本号、修订说明、对用户的对话式备注；无外链字体、脚本、图片（图表用内联 SVG）。
+-->
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{公司}} · {{岗位}} · {{文档类型：面试手册 / 面试复盘}}</title>
+<style>
+:root{
+  --paper:#F7F3EA; --paper-2:#EFE9DC; --card:#FFFDF8; --ink:#1E2421; --ink-2:#55605A; --line:#DCD4C3;
+  --emerald:#1F5E4A; --emerald-2:#2F7A62; --emerald-soft:#E3EEE8;
+  --amber:#A86A1A; --amber-soft:#F6EBD7; --rose:#A3423A; --rose-soft:#F5E1DD; --slate-soft:#E8E8E3;
+  --serif:"Songti SC","Noto Serif SC","Source Han Serif SC",STSong,Georgia,serif;
+  --sans:-apple-system,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.75 var(--sans)}
+.wrap{display:grid;grid-template-columns:220px minmax(0,1fr);max-width:1180px;margin:0 auto;gap:48px;padding:0 32px}
+nav.toc{position:sticky;top:0;align-self:start;height:100vh;padding:56px 0;overflow:auto;font-size:13px}
+nav.toc .brand{font:600 12px/1.4 var(--sans);letter-spacing:.18em;color:var(--emerald);text-transform:uppercase;margin-bottom:20px}
+nav.toc a{display:block;color:var(--ink-2);text-decoration:none;padding:6px 0 6px 12px;border-left:2px solid var(--line)}
+nav.toc a:hover{color:var(--emerald);border-left-color:var(--emerald)}
+main{padding:56px 0 96px}
+header.cover{border-bottom:3px double var(--emerald);padding-bottom:28px;margin-bottom:40px}
+.kicker{font:600 12px/1 var(--sans);letter-spacing:.2em;color:var(--emerald);text-transform:uppercase}
+h1{font:700 40px/1.25 var(--serif);margin:14px 0 10px;letter-spacing:.02em}
+.sub{color:var(--ink-2);font-size:15px}
+.meta{display:flex;flex-wrap:wrap;gap:8px 24px;margin-top:18px;font-size:13px;color:var(--ink-2)}
+.meta b{color:var(--ink);font-weight:600}
+section{margin:0 0 56px;scroll-margin-top:24px}
+h2{font:700 24px/1.35 var(--serif);margin:0 0 6px;display:flex;align-items:baseline;gap:14px}
+h2 .no{font:600 13px/1 var(--sans);color:var(--emerald);letter-spacing:.1em}
+.lead{color:var(--ink-2);margin:0 0 20px;font-size:14px}
+h3{font:600 17px/1.5 var(--serif);margin:24px 0 8px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:20px 24px;margin:12px 0}
+.card.accent{border-left:4px solid var(--emerald)}
+.card>h3:first-child{margin-top:0}
+.card>p:last-child{margin-bottom:0}
+.grid{display:grid;gap:14px}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.pull{font:600 20px/1.6 var(--serif);color:var(--emerald);border-left:4px solid var(--emerald);padding:4px 0 4px 18px;margin:16px 0}
+table{width:100%;border-collapse:collapse;background:var(--card);font-size:14px;border:1px solid var(--line)}
+th,td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{background:var(--emerald);color:#FFFDF8;font-weight:600;font-size:13px;white-space:nowrap}
+tr:nth-child(even) td{background:#FBF8F1}
+.tag{display:inline-block;font-size:12px;line-height:1;padding:4px 8px;border-radius:2px;margin:0 4px 2px 0;white-space:nowrap}
+.tag.ok{background:var(--emerald-soft);color:var(--emerald)}
+.tag.tr{background:var(--slate-soft);color:#3E4A44}
+.tag.gap{background:var(--rose-soft);color:var(--rose)}
+.tag.inf{background:var(--amber-soft);color:var(--amber)}
+.fill{background:var(--amber-soft);color:var(--amber);padding:1px 6px;border-radius:2px;font-weight:600}
+ol.flow{counter-reset:s;list-style:none;padding:0;margin:0}
+ol.flow>li{counter-increment:s;position:relative;padding:0 0 18px 44px;border-left:1px dashed var(--line);margin-left:14px}
+ol.flow>li::before{content:counter(s);position:absolute;left:-15px;top:0;width:28px;height:28px;border-radius:50%;background:var(--emerald);color:#fff;font:600 13px/28px var(--sans);text-align:center}
+ol.flow>li b{font-family:var(--serif)}
+details.qa{background:var(--card);border:1px solid var(--line);border-radius:4px;margin:10px 0}
+details.qa summary{cursor:pointer;padding:14px 20px;font:600 15px/1.6 var(--serif);list-style:none;display:flex;gap:12px}
+details.qa summary::-webkit-details-marker{display:none}
+details.qa summary .q{color:var(--emerald);font-family:var(--sans);font-size:13px;flex:none;padding-top:2px}
+details.qa[open] summary{border-bottom:1px solid var(--line)}
+details.qa .body{padding:14px 20px 18px}
+.ans dt{font-size:12px;color:var(--emerald);font-weight:600;letter-spacing:.08em;margin-top:10px}
+.ans dd{margin:2px 0 0}
+.script{font:16px/1.95 var(--serif);background:var(--card);border:1px solid var(--line);padding:24px 28px;border-radius:4px}
+.script .beat{display:block;font:600 11px/1 var(--sans);color:var(--emerald);letter-spacing:.15em;margin:14px 0 6px}
+ul.check{list-style:none;padding:0;margin:0}
+ul.check li{padding:8px 0 8px 30px;position:relative;border-bottom:1px solid var(--line)}
+ul.check li::before{content:"";position:absolute;left:4px;top:13px;width:14px;height:14px;border:1.5px solid var(--emerald);border-radius:2px}
+.score{display:inline-block;min-width:44px;text-align:center;font:600 13px/24px var(--sans);border-radius:2px}
+.score.hi{background:var(--emerald-soft);color:var(--emerald)}
+.score.mid{background:var(--amber-soft);color:var(--amber)}
+.score.lo{background:var(--rose-soft);color:var(--rose)}
+footer{border-top:1px solid var(--line);padding-top:20px;font-size:12px;color:var(--ink-2)}
+footer ol{padding-left:18px}
+@media (max-width:900px){.wrap{grid-template-columns:1fr;gap:0}nav.toc{display:none}.g2,.g3{grid-template-columns:1fr}h1{font-size:30px}}
+@media print{nav.toc{display:none}.wrap{display:block}body{background:#fff}details.qa{break-inside:avoid}details.qa .body{display:block}section{break-inside:avoid-page}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<nav class="toc">
+  <div class="brand">{{公司}} · {{轮次}}</div>
+  <!-- prep -->
+  <a href="#position">01 定位一句话</a>
+  <a href="#match">02 JD 匹配矩阵</a>
+  <a href="#prior">03 上一轮复盘</a>
+  <a href="#biz">04 业务与平台理解</a>
+  <a href="#defend">05 简历可防守地图</a>
+  <a href="#flow">06 面试流程</a>
+  <a href="#intro">07 自我介绍</a>
+  <a href="#qa">08 高频问答</a>
+  <a href="#case">09 场景案例</a>
+  <a href="#ask">10 反问清单</a>
+  <a href="#checklist">11 面前清单</a>
+  <!-- review -->
+  <a href="#replay">01 面试还原</a>
+  <a href="#diagnose">02 失分点诊断</a>
+  <a href="#rules">03 修复规则</a>
+  <a href="#rewrite">04 关键回答重写</a>
+  <a href="#next">05 下一轮预测</a>
+  <a href="#todo">06 补课清单</a>
+</nav>
+
+<main>
+<header class="cover">
+  <div class="kicker">Interview {{Playbook / Review}}</div>
+  <h1>{{公司}} · {{岗位}}</h1>
+  <div class="sub">{{一句话：本轮面试的核心考察点 / 本次复盘的核心结论}}</div>
+  <div class="meta">
+    <span><b>候选人</b> {{姓名}}</span>
+    <span><b>轮次</b> {{一面业务 / 二面主管 / HR 面}}</span>
+    <span><b>日期</b> {{YYYY-MM-DD}}</span>
+    <span><b>面试官</b> {{角色推断，如：组长 / 业务负责人}}</span>
+  </div>
+</header>
+
+<!-- ============ PREP MODE ============ -->
+
+<section id="position" data-mode="prep">
+  <h2><span class="no">01</span>定位一句话</h2>
+  <p class="lead">面试官记住你的一句话，以及支撑它的三条证据。</p>
+  <div class="pull">{{我是一个……的人，能为这个岗位带来……}}</div>
+  <div class="grid g3">
+    <!-- REPEAT ×3 -->
+    <div class="card accent"><h3>{{证据标题}}</h3><p>{{简历中的事实}} <span class="tag ok">简历可证</span></p></div>
+  </div>
+</section>
+
+<section id="match" data-mode="prep">
+  <h2><span class="no">02</span>JD 匹配矩阵</h2>
+  <p class="lead">左边是岗位要求，右边是可以拿出来证明的东西；缺口如实标注，并给出补位说法。</p>
+  <table>
+    <thead><tr><th>JD 职责</th><th>考察能力（推断）</th><th>简历证据</th><th>岗位翻译</th><th>缺口 / 补位说法</th></tr></thead>
+    <tbody>
+      <!-- REPEAT -->
+      <tr><td>{{JD 原文}}</td><td>{{能力}} <span class="tag inf">推断</span></td><td>{{事实}} <span class="tag ok">简历可证</span></td><td>{{翻译成岗位语言}} <span class="tag tr">翻译</span></td><td>{{缺口}} <span class="tag gap">风险</span><br>{{诚实补位叙述}}</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- OPTIONAL：仅在有上一轮逐字稿/反馈时保留 -->
+<section id="prior" data-mode="prep">
+  <h2><span class="no">03</span>上一轮复盘</h2>
+  <p class="lead">上一轮暴露的每个缺口，都转成本轮的一条修复规则。</p>
+  <table>
+    <thead><tr><th>上一轮表现 / 反馈</th><th>背后的判断</th><th>本轮修复规则</th></tr></thead>
+    <tbody><!-- REPEAT --><tr><td>{{原话或反馈}}</td><td>{{面试官真正担心什么}}</td><td>{{一条可执行规则}}</td></tr></tbody>
+  </table>
+</section>
+
+<section id="biz" data-mode="prep">
+  <h2><span class="no">04</span>业务与平台理解</h2>
+  <p class="lead">用户为什么来，平台靠什么形成闭环，这个岗位在闭环里推动哪个环节。</p>
+  <div class="grid g2">
+    <div class="card"><h3>用户与场景</h3><p>{{核心用户分层 · 使用动机 · 关键场景}}</p></div>
+    <div class="card"><h3>产品 / 内容闭环</h3><p>{{工具—内容—互动—反馈 循环}}</p></div>
+    <div class="card"><h3>岗位杠杆点</h3><p>{{本岗位影响的环节与指标}}</p></div>
+    <div class="card"><h3>可以提出的观察</h3><p>{{1–2 条有依据的观察或优化方向}} <span class="tag inf">推断</span></p></div>
+  </div>
+</section>
+
+<section id="defend" data-mode="prep">
+  <h2><span class="no">05</span>简历可防守地图</h2>
+  <p class="lead">每个数字、奖项、“主导/全流程”类表述都是追问入口。</p>
+  <table>
+    <thead><tr><th>简历表述</th><th>可能追问链</th><th>本人边界</th><th>证据</th><th>安全说法</th></tr></thead>
+    <tbody><!-- REPEAT --><tr><td>{{原句}}</td><td>{{追问1 → 追问2 → 追问3}}</td><td>{{本人负责 / 协作 / 团队成果}}</td><td>{{证据}} 或 <span class="fill">待补：{{需要候选人确认的事实}}</span></td><td>{{归因清晰的说法}}</td></tr></tbody>
+  </table>
+</section>
+
+<section id="flow" data-mode="prep">
+  <h2><span class="no">06</span>面试流程</h2>
+  <p class="lead">按环节预判考察重点与时间分配。</p>
+  <ol class="flow">
+    <!-- REPEAT -->
+    <li><b>{{环节名，如：自我介绍 · 5 min}}</b><br>{{考察点}} — {{应对策略}}</li>
+  </ol>
+</section>
+
+<section id="intro" data-mode="prep">
+  <h2><span class="no">07</span>自我介绍 · 60–90 秒</h2>
+  <p class="lead">约 {{字数}} 字，按正常语速朗读约 {{秒数}} 秒。</p>
+  <div class="script">
+    <span class="beat">身份 · 10s</span>{{……}}
+    <span class="beat">核心经历 · 40s</span>{{……}}
+    <span class="beat">与岗位的连接 · 20s</span>{{……}}
+    <span class="beat">动机 · 10s</span>{{……}}
+  </div>
+</section>
+
+<section id="qa" data-mode="prep">
+  <h2><span class="no">08</span>高频问答</h2>
+  <p class="lead">回答顺序：结论 → 用户/场景 → 2–3 个动作 → 证据 → 指标或风险。点击展开。</p>
+  <!-- REPEAT ≥8 -->
+  <details class="qa">
+    <summary><span class="q">Q{{n}}</span>{{问题}}</summary>
+    <div class="body">
+      <dl class="ans">
+        <dt>考察意图</dt><dd>{{面试官想确认什么}}</dd>
+        <dt>回答骨架</dt><dd>{{结论 → 场景 → 动作 → 证据 → 指标/风险}}</dd>
+        <dt>参考回答</dt><dd>{{口语化参考稿}}</dd>
+        <dt>避坑</dt><dd>{{不要说什么}}</dd>
+      </dl>
+    </div>
+  </details>
+</section>
+
+<section id="case" data-mode="prep">
+  <h2><span class="no">09</span>场景案例</h2>
+  <p class="lead">{{案例题干}}</p>
+  <div class="grid g2">
+    <div class="card"><h3>目标</h3><p>{{业务目标与北极星指标}}</p></div>
+    <div class="card"><h3>用户分层</h3><p>{{分层与各层的参与阻力}}</p></div>
+    <div class="card"><h3>机制设计</h3><p>{{激励 · 内容分发 · 参与路径}}</p></div>
+    <div class="card"><h3>指标与复盘</h3><p>{{过程指标 / 结果指标 / 复盘节奏 / 风险预案}}</p></div>
+  </div>
+</section>
+
+<section id="ask" data-mode="prep">
+  <h2><span class="no">10</span>反问清单</h2>
+  <table>
+    <thead><tr><th>问题</th><th>想了解什么</th><th>适合问谁</th></tr></thead>
+    <tbody><!-- REPEAT --><tr><td>{{问题}}</td><td>{{目的}}</td><td>{{业务面 / 主管面 / HR}}</td></tr></tbody>
+  </table>
+</section>
+
+<section id="checklist" data-mode="prep">
+  <h2><span class="no">11</span>面前清单</h2>
+  <ul class="check">
+    <!-- REPEAT -->
+    <li>{{面试前要完成的事，如：补齐 <span class="fill">待补</span> 项 / 朗读自我介绍三遍 / 准备作品链接}}</li>
+  </ul>
+</section>
+
+<!-- ============ REVIEW MODE ============ -->
+
+<section id="replay" data-mode="review">
+  <h2><span class="no">01</span>面试还原</h2>
+  <p class="lead">按时间线还原题目与回答要点，标注每题的表现。</p>
+  <table>
+    <thead><tr><th>#</th><th>面试官问题</th><th>实际回答要点</th><th>面试官反应 / 追问</th><th>表现</th></tr></thead>
+    <tbody><!-- REPEAT --><tr><td>{{n}}</td><td>{{问题}}</td><td>{{要点}}</td><td>{{反应}}</td><td><span class="score hi">稳</span> / <span class="score mid">弱</span> / <span class="score lo">失分</span></td></tr></tbody>
+  </table>
+</section>
+
+<section id="diagnose" data-mode="review">
+  <h2><span class="no">02</span>失分点诊断</h2>
+  <p class="lead">把失分归入具体类别，区分“没说清楚”和“确实没有”。</p>
+  <table>
+    <thead><tr><th>失分点</th><th>类别</th><th>根因</th><th>面试官可能形成的判断</th></tr></thead>
+    <tbody><!-- REPEAT --><tr><td>{{具体片段}}</td><td>{{结构缺失 / 证据不足 / 归因不清 / 业务理解浅 / 能力缺口 / 动机模糊}}</td><td>{{为什么会这样}}</td><td>{{担忧}}</td></tr></tbody>
+  </table>
+</section>
+
+<section id="rules" data-mode="review">
+  <h2><span class="no">03</span>修复规则</h2>
+  <p class="lead">每个失分点对应一条下一轮可直接执行的规则。</p>
+  <ol class="flow"><!-- REPEAT --><li><b>{{规则}}</b><br>{{触发场景}} — {{具体做法}}</li></ol>
+</section>
+
+<section id="rewrite" data-mode="review">
+  <h2><span class="no">04</span>关键回答重写</h2>
+  <!-- REPEAT：只重写标为“弱/失分”的题 -->
+  <details class="qa" open>
+    <summary><span class="q">Q{{n}}</span>{{问题}}</summary>
+    <div class="body"><dl class="ans">
+      <dt>原回答</dt><dd>{{摘要}}</dd>
+      <dt>问题所在</dt><dd>{{诊断}}</dd>
+      <dt>重写版</dt><dd>{{结论 → 场景 → 动作 → 证据 → 指标/风险}}</dd>
+    </dl></div>
+  </details>
+</section>
+
+<section id="next" data-mode="review">
+  <h2><span class="no">05</span>下一轮预测</h2>
+  <p class="lead">根据本轮暴露的点，预测下一轮会被继续追问的方向。</p>
+  <table>
+    <thead><tr><th>预测问题</th><th>来源</th><th>准备要点</th></tr></thead>
+    <tbody><!-- REPEAT --><tr><td>{{问题}}</td><td>{{本轮哪段引出}}</td><td>{{要点}}</td></tr></tbody>
+  </table>
+</section>
+
+<section id="todo" data-mode="review">
+  <h2><span class="no">06</span>补课清单</h2>
+  <ul class="check"><!-- REPEAT --><li>{{具体补课动作 + 产出物，如：补一份 xx 产品拆解}}</li></ul>
+</section>
+
+<footer>
+  <b>资料来源</b>
+  <ol><!-- REPEAT --><li>{{简历文件名 / JD 来源 / 面试逐字稿}}</li></ol>
+  <p>标注 <span class="fill">待补</span> 的内容需候选人用本人真实数据替换；<span class="tag inf">推断</span> 为基于公开信息的判断，面试中请以提问方式确认。</p>
+</footer>
+</main>
+</div>
+</body>
+</html>
